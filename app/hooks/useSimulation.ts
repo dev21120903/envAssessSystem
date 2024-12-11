@@ -25,7 +25,24 @@ export const useSimulation = () => {
   };
 
   const calcEmissions = (rows: SimulationRow[], category: SimulationCategory) => {
-    return calculateTotalEmissions(rows, category);
+    // Only calculate original emissions for non-added rows
+    const originalEmissions = calculateTotalEmissions(
+      rows.filter(row => !row.canDelete),
+      category,
+      'original'
+    );
+
+    // Calculate modified emissions for all rows
+    const modifiedEmissions = calculateTotalEmissions(
+      rows,
+      category,
+      'modified'
+    );
+
+    return {
+      original: originalEmissions,
+      modified: modifiedEmissions
+    };
   };
 
   const machineEmissions = calcEmissions(machineData, 'machine');
@@ -70,12 +87,21 @@ export const useSimulation = () => {
   const addRow = (category: SimulationCategory, index: number) => {
     const [data, setData] = categoryDataMap[category];
     const sourceRow = data[index];
+    
+    // Create a new row with empty original values
     const newRow: SimulationRow = {
-      ...sourceRow,
       id: `${Date.now()}`,
+      purpose: '',
+      name: '',
       canDelete: true,
-      modified: {
+      original: {
         ...sourceRow.original,
+        quantity: 0,
+        unit: '',
+        emissionFactor: 0,
+      },
+      modified: {
+        ...sourceRow.modified,
         adjust: 0,
       },
     };
@@ -90,7 +116,6 @@ export const useSimulation = () => {
     setData(data.filter(row => row.id !== id));
   };
 
-  // 数値項目一覧
   const numberFields = [
     'percentage', 'operatingHours', 'adjust',
     'quantity', 'carbonIntensity',
@@ -101,8 +126,6 @@ export const useSimulation = () => {
   const updateModifiedValue = (category: SimulationCategory, id: string, field: keyof SimulationRow['modified'], value: string | number) => {
     const [data, setData] = categoryDataMap[category];
     const isNumberField = numberFields.includes(field as string);
-
-    // 数値フィールドは常にnumber化、文字フィールドはstring化する
     const newValue = isNumberField ? Number(value) : String(value);
 
     setData(data.map(row => {
@@ -113,7 +136,7 @@ export const useSimulation = () => {
             ...row.modified,
             [field]: newValue,
           },
-        } as SimulationRow; // as SimulationRowで型を確定
+        } as SimulationRow;
       }
       return row;
     }));
