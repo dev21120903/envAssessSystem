@@ -1,0 +1,28 @@
+{
+  "common": {
+    "dashboard": "ダッシュボード",
+    "database": "データベース",
+    "simulation": "シミュレーション",
+    "otherCase": "その他ケース",
+    "report": "レポート",
+    "settings": "設定",
+    "logout": "ログアウト",
+    "welcome": "お帰りなさい",
+    "carbonGoal": "カーボンニュートラル目標は2050年です。",
+    "help": "ヘルプ",
+    "notifications": "通知",
+    "language": "言語"
+  },
+  "dashboard": {
+    "totalEmissions": "総排出量",
+    "scope1": "スコープ1",
+    "scope2": "スコープ2",
+    "scope3": "スコープ3",
+    "thisMonth": "今月",
+    "emissionsOverview": "CO2排出量の概要",
+    "ghgCategory": "GHGカテゴリー",
+    "planRatio": "計画比",
+    "thisYear": "今年",
+    "total": "合計"
+  }
+}

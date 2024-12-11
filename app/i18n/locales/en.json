@@ -1,0 +1,28 @@
+{
+  "common": {
+    "dashboard": "Dashboard",
+    "database": "Database",
+    "simulation": "Simulation",
+    "otherCase": "Other Case",
+    "report": "Report",
+    "settings": "Settings",
+    "logout": "Logout",
+    "welcome": "Welcome back",
+    "carbonGoal": "Carbon Neutrality Goal is 2050.",
+    "help": "Help",
+    "notifications": "Notifications",
+    "language": "Language"
+  },
+  "dashboard": {
+    "totalEmissions": "Total Emissions",
+    "scope1": "Scope 1",
+    "scope2": "Scope 2",
+    "scope3": "Scope 3",
+    "thisMonth": "this month",
+    "emissionsOverview": "CO2 Emissions Overview",
+    "ghgCategory": "GHG Category",
+    "planRatio": "Plan Ratio",
+    "thisYear": "This year",
+    "total": "Total"
+  }
+}
